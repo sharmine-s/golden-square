@@ -1,13 +1,14 @@
 class Reminder
-	def initialize(name)
+  def initialize(name)
 		@name = name
-  end
+	end
 
   def remind_me_to(task)
-      @task = task
+    @task = task
   end
 
   def remind()
-      return "#{@task}, #{@name}!"
+    fail "No reminder set!" if @task.nil?
+  	return "#{@task}, #{@name}!"
   end
 end

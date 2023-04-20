@@ -1,14 +1,14 @@
 class Dish
-  def initialize(dish_name, dish_price)
-    @dish_name = dish_name
-    @dish_price = dish_price
+  def initialize(name, price)
+    @dish_name = name
+    @dish_price = price
   end
 
-  def dish_name
+  def get_name
     return @dish_name
   end
 
-  def dish_price
+  def get_price
     return @dish_price
   end
 end

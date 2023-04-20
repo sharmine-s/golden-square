@@ -1,5 +1,7 @@
 class Dish
   def initialize(name, price)
+    fail "Dish name should be a String" unless name.is_a? String
+    fail "Dish price should be an Integer" unless price.is_a? Integer
     @dish_name = name
     @dish_price = price
   end

@@ -22,5 +22,12 @@ RSpec.describe Menu do
       menu.add_to_menu(edamame)
       expect(menu.get_dish_if_in_menu("edamame")).to eq edamame
     end
+
+    it "Returns nil if dish does not exist in the menu" do
+      edamame = double(:Dish, get_name: "edamame", get_price: 2, is_a?: true)
+      menu = Menu.new
+      menu.add_to_menu(edamame)
+      expect(menu.get_dish_if_in_menu("ramen")).to eq nil
+    end
   end
 end

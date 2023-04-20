@@ -12,13 +12,13 @@ class Menu
 
   def show_menu
     @menu_list.each { |dish| 
-      puts "#{dish.get_name}: #{dish.get_price}"
+      puts "#{dish.get_name}: £#{dish.get_price}"
     }
   end
 
-  def dish_in_menu?(dish_name)
+  def get_dish_if_in_menu(dish_name)
     fail "Dish name should be entered as a string" unless dish_name.is_a? String
-    @menu_list.each { |dish| return true if dish.get_name == dish_name }
-    return false
+    @menu_list.each { |dish| return dish if dish.get_name == dish_name }
+    return nil
   end
 end

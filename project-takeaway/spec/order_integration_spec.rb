@@ -6,7 +6,7 @@ RSpec.describe "Order & Menu integration tests" do
   context "Creating a menu" do
     describe "Adds dishes to the menu and shows the menu" do
       it "Creates 1 dish, adds it, and shows it" do
-        edamame = Dish.new("edamame", "£2")
+        edamame = Dish.new("edamame", 2)
         menu = Menu.new
         menu.add_to_menu(edamame)
         expect { menu.show_menu }.to output("edamame: £2\n").to_stdout
@@ -19,34 +19,36 @@ RSpec.describe "Order & Menu integration tests" do
     end
 
     describe "Checks if dish is in the menu_list" do
-      it "Returns true when finding an existing dish" do
-        edamame = Dish.new("edamame", "£2")
+      it "Returns dish when finding an existing dish name" do
+        edamame = Dish.new("edamame", 2)
         menu = Menu.new
         menu.add_to_menu(edamame)
-        expect(menu.dish_in_menu?("edamame")).to eq true
+        expect(menu.get_dish_if_in_menu("edamame")).to eq edamame
       end
 
-      it "Returns false when not finding and inexistent dish" do
+      it "Returns nil when not finding and inexistent dish" do
         menu = Menu.new
-        expect(menu.dish_in_menu?("edamame")).to eq false
+        expect(menu.get_dish_if_in_menu("edamame")).to eq nil
       end
 
       it "Fails if trying to enter a dish_name that is not a String" do
-        edamame = Dish.new("edamame", "£2")
+        edamame = Dish.new("edamame", 2)
         menu = Menu.new
-        expect { menu.dish_in_menu?(edamame) }.to raise_error "Dish name should be entered as a string"
+        expect { menu.get_dish_if_in_menu(edamame) }.to raise_error "Dish name should be entered as a string"
       end
     end
   end
 
   context "Creating an order" do
     describe "Adds dishes to order and shows a receipt" do
-      it "Adds dish to order if it exists on the menu" do
-        edamame = Dish.new("edamame", "£2")
+      it "Adds 1 dish to order and shows itemized and total in receipt" do
+        edamame = Dish.new("edamame", 2)
         menu = Menu.new
+        menu.add_to_menu(edamame)
         order = Order.new
-        order.add_to_order(edamame)
-        expect { order.show_receipt }.to output("edamame: £2\n total: £2\n").to_stdout
+        dish = menu.get_dish_if_in_menu("edamame")
+        order.add_to_order(dish)
+        expect { order.show_receipt }.to output("edamame: £2\ntotal: £2\n").to_stdout
       end
     end
   end

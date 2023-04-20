@@ -68,6 +68,11 @@ RSpec.describe "Order & Menu integration tests" do
         order.add_to_order(dish_3)
         expect { order.show_receipt }.to output("edamame: £2\ngyoza: £4\nramen: £9\ntotal: £15\n").to_stdout
       end
+
+      it "Fails if trying to add something that isn't a Dish object" do
+        order = Order.new
+        expect { order.add_to_order("edamame") }.to raise_error "Dish should be an object from the Dish class"
+      end
     end
   end
 end

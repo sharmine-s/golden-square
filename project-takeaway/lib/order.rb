@@ -4,6 +4,7 @@ class Order
   end
 
   def add_to_order(dish)
+    fail "Dish should be an object from the Dish class" unless dish.is_a? Dish
     @order << dish
   end
 

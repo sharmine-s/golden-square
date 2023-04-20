@@ -1,3 +1,5 @@
+require 'dish'
+
 class Order
   def initialize
     @order = []

@@ -29,5 +29,11 @@ RSpec.describe Menu do
       menu.add_to_menu(edamame)
       expect(menu.get_dish_if_in_menu("ramen")).to eq nil
     end
+
+    it "Fails if dish_name is not a String" do
+      edamame = double(:Dish, get_name: "edamame", get_price: 2)
+      menu = Menu.new
+      expect { menu.get_dish_if_in_menu(edamame) }.to raise_error "Dish name should be entered as a string"
+    end
   end
 end

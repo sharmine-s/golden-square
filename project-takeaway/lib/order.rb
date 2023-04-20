@@ -11,11 +11,8 @@ class Order
   end
 
   def show_receipt
-    total = 0
-    @order.each { |dish| 
-      puts "#{dish.get_name}: £#{dish.get_price}"
-      total += dish.get_price
-    }
+    total = @order.reduce(0) { |total, dish| total += dish.get_price }
+    @order.each { |dish| puts "#{dish.get_name}: £#{dish.get_price}" }
     puts "total: £#{total}"
   end
 end

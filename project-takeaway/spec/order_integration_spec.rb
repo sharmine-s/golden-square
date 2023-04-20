@@ -50,6 +50,24 @@ RSpec.describe "Order & Menu integration tests" do
         order.add_to_order(dish)
         expect { order.show_receipt }.to output("edamame: £2\ntotal: £2\n").to_stdout
       end
+
+      it "Adds multiple dishes to order and shows itemized and total in receipt" do
+        edamame = Dish.new("edamame", 2)
+        gyoza = Dish.new("gyoza", 4)
+        ramen = Dish.new("ramen", 9)
+        menu = Menu.new
+        menu.add_to_menu(edamame)
+        menu.add_to_menu(gyoza)
+        menu.add_to_menu(ramen)
+        order = Order.new
+        dish_1 = menu.get_dish_if_in_menu("edamame")
+        dish_2 = menu.get_dish_if_in_menu("gyoza")
+        dish_3 = menu.get_dish_if_in_menu("ramen")
+        order.add_to_order(dish_1)
+        order.add_to_order(dish_2)
+        order.add_to_order(dish_3)
+        expect { order.show_receipt }.to output("edamame: £2\ngyoza: £4\nramen: £9\ntotal: £15\n").to_stdout
+      end
     end
   end
 end

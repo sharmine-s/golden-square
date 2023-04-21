@@ -1,5 +1,3 @@
-require 'dish'
-
 class Menu
   def initialize
     @menu_list = []

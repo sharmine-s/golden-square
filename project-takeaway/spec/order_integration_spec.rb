@@ -84,7 +84,7 @@ RSpec.describe "Order & Menu integration tests" do
       order = Order.new
       dish = menu.get_dish_if_in_menu("edamame")
       order.add_to_order(dish)
-      expect { order.send_notification }.to output("Thank you! Your order was placed and will be delivered before 18:52").to_stdout
+      expect { order.send_notification }.to output("Thank you! Your order was placed and will be delivered before 18:52\n").to_stdout
     end
   end
 end

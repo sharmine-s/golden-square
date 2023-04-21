@@ -75,4 +75,8 @@ RSpec.describe "Order & Menu integration tests" do
       end
     end
   end
+
+  context "Sending a text notification" do
+    it "Uses the Twilio API to send a text"
+  end
 end

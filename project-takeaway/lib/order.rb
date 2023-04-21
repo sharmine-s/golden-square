@@ -15,5 +15,9 @@ class Order
     @order.each { |dish| puts "#{dish.get_name}: £#{dish.get_price}" }
     puts "total: £#{total}"
   end
+
+  def send_notification
+    print "Thank you! Your order was placed and will be delivered before 18:52"
+  end
 end
 

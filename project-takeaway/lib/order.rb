@@ -1,5 +1,6 @@
 require 'twilio-ruby'
-require 'config'
+require 'dotenv'
+Dotenv.load('environment.env')
 
 class Order
   def initialize
@@ -20,11 +21,11 @@ class Order
   def send_notification
     # Your Account SID and Auth Token from console.twilio.com
     
-    @client = Twilio::REST::Client.new account_sid, auth_token
+    @client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
     message = @client.messages.create(
     body: "Thank you! Your order was placed and will be delivered before 18:52",
-    to: to_phone_number,  # Text this number
-    from: from_phone_number, # From a valid Twilio number
+    to: ENV['TO_PHONE_NUMBER'],  # Text this number
+    from: ENV['FROM_PHONE_NUMBER'], # From a valid Twilio number
     )
     
     puts "Thank you! Your order was placed and will be delivered before 18:52\n"

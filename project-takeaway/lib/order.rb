@@ -1,4 +1,5 @@
-require "twilio-ruby"
+require 'twilio-ruby'
+require 'config'
 
 class Order
   def initialize
@@ -18,14 +19,12 @@ class Order
 
   def send_notification
     # Your Account SID and Auth Token from console.twilio.com
-    account_sid = 
-    auth_token = 
-
+    
     @client = Twilio::REST::Client.new account_sid, auth_token
     message = @client.messages.create(
     body: "Thank you! Your order was placed and will be delivered before 18:52",
-    to: ,  # Text this number
-    from: , # From a valid Twilio number
+    to: to_phone_number,  # Text this number
+    from: from_phone_number, # From a valid Twilio number
     )
     
     puts "Thank you! Your order was placed and will be delivered before 18:52\n"
